@@ -4,7 +4,7 @@ chrome.tabs.query({ currentWindow : true, highlighted : true }, (tab) => {
     const site = 'https://pawoo.net'
     const nl = "\n"
 
-    const intent = `${site}/share?text=${encodeURIComponent(nl+title+nl+url)}`
+    const intent = `${site}/share?text=${encodeURIComponent(nl+nl+title+nl+url)}`
 
     chrome.tabs.create({ url : intent });
 });
