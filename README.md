@@ -2,7 +2,7 @@
 
 Share webpage to Mastodon easily.
 
-![](/icon.png)
+![icon](/icon.png)
 
 ## Installation
 
@@ -10,11 +10,13 @@ Share webpage to Mastodon easily.
 2. Update `site` in `app.js`.
 3. Navigate to `chrome://extensions` on Chromium.
 4. Load unpacked.
+5. fill in `PAWOO_RT_API` and `PAWOO_RT_TOKEN` or comment out the if block.
 
 ## See also
 
 - [twitthat](https://twitthat.com/)
 - [twitthat-chrome-extension](https://github.com/xatier/twitthat-chrome-extension)
+- [pawoo-rt](https://github.com/xatier/pawoo-rt)
 
 ## Icon
 
