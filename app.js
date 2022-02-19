@@ -1,10 +1,42 @@
-chrome.tabs.query({ currentWindow : true, highlighted : true }, (tab) => {
-    const {url, title} = tab[0];
+chrome.tabs.query({ currentWindow: true, highlighted: true }, async (tab) => {
+    const { url, title } = tab[0]
 
     const site = 'https://pawoo.net'
-    const nl = "\n"
+    const nl = '\n\n'
 
-    const intent = `${site}/share?text=${encodeURIComponent(nl+nl+title+nl+url)}`
+    const TWITTER_STATUS_REGEX = /^https:\/\/twitter.com\/(.+?)\/status\/(\d+)/
 
-    chrome.tabs.create({ url : intent });
-});
+    let intent = `${site}/share?text=${encodeURIComponent(
+        nl + title + nl + url,
+    )}`
+
+    // if post is a tweet, use PAWOO_RT_API
+    if (url.match(TWITTER_STATUS_REGEX) !== null) {
+        const rt = await pawoo_rt(url)
+
+        intent = `${site}/share?text=${encodeURIComponent(
+            nl + 'RT:' + nl + rt + nl + url,
+        )}`
+    }
+
+    chrome.tabs.create({ url: intent })
+})
+
+const pawoo_rt = async (url) => {
+    const PAWOO_RT_API = ''
+    const PAWOO_RT_TOKEN = ''
+
+    const response = await fetch(PAWOO_RT_API, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: PAWOO_RT_TOKEN,
+            status: url,
+        }),
+    })
+
+    const data = await response.json()
+    return data.status
+}
