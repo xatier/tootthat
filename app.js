@@ -4,7 +4,8 @@ chrome.tabs.query({ currentWindow: true, highlighted: true }, async (tab) => {
     const site = 'https://pawoo.net'
     const nl = '\n\n'
 
-    const TWITTER_STATUS_REGEX = /^https:\/\/twitter.com\/(.+?)\/status\/(\d+)/
+    const TWITTER_STATUS_REGEX =
+        /^https:\/\/(mobile\.)?twitter.com\/(.+?)\/status\/(\d+)/
 
     let intent = `${site}/share?text=${encodeURIComponent(
         nl + title + nl + url,
