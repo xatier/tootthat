@@ -1,5 +1,5 @@
 chrome.tabs.query({ currentWindow: true, highlighted: true }, async (tab) => {
-    const { url, title } = tab[0]
+    const { url, title, index } = tab[0]
 
     const site = 'https://pawoo.net'
     const nl = '\n\n'
@@ -20,7 +20,7 @@ chrome.tabs.query({ currentWindow: true, highlighted: true }, async (tab) => {
         )}`
     }
 
-    chrome.tabs.create({ url: intent })
+    chrome.tabs.create({ url: intent, index: index + 1 })
 })
 
 const pawoo_rt = async (url) => {
